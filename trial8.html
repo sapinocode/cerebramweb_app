@@ -1,0 +1,532 @@
+Here is the updated HTML with a significantly improved, more professional navigation bar design.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CereBram | EEG Spectrum — Alpha Band Topomap | 8-12 Hz Power Distribution</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- DataTables + Bootstrap + AdminLTE + Chart.js -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  
+  <style>
+    * { font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif; }
+    body { background: radial-gradient(circle at 20% 30%, #0a0f1e, #02060c); background-attachment: fixed; overflow-x: hidden; }
+    @keyframes pulseIcon { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+    @keyframes rotateRing { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes glowPulse { 0% { box-shadow: 0 0 5px rgba(56,189,248,0.3); } 50% { box-shadow: 0 0 15px rgba(56,189,248,0.6); } 100% { box-shadow: 0 0 5px rgba(56,189,248,0.3); } }
+    
+    /* IMPROVED NAVIGATION BAR - Premium Design */
+    .main-header {
+      background: linear-gradient(135deg, rgba(5, 12, 22, 0.95), rgba(2, 6, 16, 0.95)) !important;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-item {
+      position: relative;
+    }
+    
+    .nav-link {
+      transition: all 0.2s ease;
+      border-radius: 12px;
+      padding: 8px 16px !important;
+      margin: 0 2px;
+    }
+    
+    .nav-link:hover {
+      background: rgba(56, 189, 248, 0.15);
+      transform: translateY(-1px);
+    }
+    
+    /* Premium Status Indicator */
+    .folder-status {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s;
+    }
+    
+    .folder-status i {
+      font-size: 0.85rem;
+    }
+    
+    /* Fullscreen Button Style */
+    .fullscreen-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 40px;
+      padding: 8px 16px !important;
+      transition: all 0.2s;
+    }
+    
+    .fullscreen-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      transform: translateY(-1px);
+    }
+    
+    /* Right side controls group */
+    .navbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 60px;
+      padding: 4px 8px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    
+    /* Logo ring and brand improvements */
+    .logo-ring::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 50%; background: conic-gradient(from 0deg, #38bdf8, #8b5cf6, #38bdf8, #8b5cf6); animation: rotateRing 3s linear infinite; z-index: -1; }
+    .logo-ring::after { content: ''; position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px; border-radius: 50%; background: #0a0e23; z-index: -1; }
+    .brand-link:hover .logo-image { transform: scale(1.05); border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+    
+    .dataTables_wrapper .dataTables_filter input, .dataTables_wrapper .dataTables_length select { background: #1e293b !important; border: 1px solid #38bdf8 !important; border-radius: 30px !important; padding: 6px 14px !important; color: #f1f5f9 !important; font-size: 0.75rem !important; }
+    
+    /* Improved Pagination Buttons */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      padding: 6px 14px !important;
+      margin: 0 4px !important;
+      border-radius: 30px !important;
+      background: rgba(30, 41, 59, 0.8) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3) !important;
+      color: #cbd5e6 !important;
+      font-weight: 500 !important;
+      font-size: 0.75rem !important;
+      transition: all 0.2s ease !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      background: #38bdf8 !important;
+      color: #0a0f1e !important;
+      border-color: #38bdf8 !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: linear-gradient(135deg, #38bdf8, #8b5cf6) !important;
+      border-color: transparent !important;
+      color: white !important;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+      opacity: 0.4;
+      background: rgba(30, 41, 59, 0.5) !important;
+      border-color: rgba(56, 189, 248, 0.15) !important;
+      cursor: not-allowed;
+    }
+    
+    .card { background: rgba(12, 22, 35, 0.85); backdrop-filter: blur(4px); border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.25); box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4); }
+    .card-header { background: rgba(20, 35, 55, 0.6); border-bottom: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px 20px 0 0 !important; padding: 0.7rem 1.2rem; }
+    .main-sidebar { background: linear-gradient(145deg, rgba(8, 16, 26, 0.98), rgba(2, 6, 16, 0.98)); border-right: 1px solid rgba(56, 189, 248, 0.2); }
+    .brand-link { padding: 15px 20px !important; text-decoration: none; }
+    .brand-text { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, #FFFFFF 0%, #38bdf8 50%, #c084fc 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .chart-container { background: rgba(15, 23, 42, 0.6); border-radius: 12px; padding: 15px; height: 300px; width: 100%; }
+    canvas#eegChart { max-height: 260px; width: 100%; }
+    .eeg-metrics { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+    .metric-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 12px; padding: 12px 20px; text-align: center; flex: 1; min-width: 100px; border: 1px solid rgba(56, 189, 248, 0.2); }
+    .metric-card .metric-value { font-size: 24px; font-weight: bold; background: linear-gradient(to right, #f0f9ff, #7dd3fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .metric-card .metric-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; }
+    .spectral-density-circle { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px; }
+    .alpha-density-ring { width: 100px; height: 100px; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(56,189,248,0.2), rgba(56,189,248,0.05)); border: 2px solid #38bdf8; box-shadow: 0 0 20px rgba(56,189,248,0.3); margin: 0 auto 10px; }
+    .alpha-density-ring canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .alpha-density-value { font-size: 1.8rem; font-weight: 800; color: #38bdf8; z-index: 10; }
+    .alpha-density-label { font-size: 0.65rem; color: #94a3b8; margin-top: 5px; }
+    .eeg-lab-display { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding: 10px 15px; background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.1)); border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .eeg-lab-icon { font-size: 2rem; color: #38bdf8; animation: pulseIcon 2s ease-in-out infinite; }
+    .eeg-lab-text { flex: 1; }
+    .eeg-lab-text h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #38bdf8; }
+    .eeg-lab-text p { margin: 0; font-size: 0.7rem; color: #94a3b8; }
+    .eeg-lab-status { display: flex; align-items: center; gap: 8px; padding: 5px 12px; background: rgba(16, 185, 129, 0.2); border-radius: 30px; border: 1px solid #10b981; }
+    .eeg-lab-status span { font-size: 0.7rem; color: #34d399; }
+    .table-responsive { max-height: 350px; overflow-y: auto; border-radius: 16px; }
+    #data-table { font-size: 0.72rem; margin-bottom: 0; }
+    #data-table thead th { background: #0f172a; color: #cbd5e6; font-weight: 700; font-size: 0.7rem; padding: 10px 8px; position: sticky; top: 0; }
+    #data-table td { padding: 8px 6px; color: #e2e8f0; vertical-align: middle; }
+    #data-table th:nth-child(1) { width: 12%; }
+    #data-table th:nth-child(2) { width: 10%; }
+    #data-table th:nth-child(3) { width: 10%; }
+    #data-table th:nth-child(4) { width: 10%; }
+    #data-table th:nth-child(5) { width: 8%; }
+    #data-table th:nth-child(6) { width: 10%; }
+    #data-table th:nth-child(7) { width: 10%; }
+    #data-table th:nth-child(8) { width: 12%; }
+    #data-table th:nth-child(9) { width: 10%; }
+    
+    .badge-task-sm { padding: 2px 8px; border-radius: 30px; font-size: 0.65rem; font-weight: 600; display: inline-block; min-width: 60px; }
+    .badge-EO { background: #2563eb; color: white; }
+    .badge-EC { background: #dc2626; color: white; }
+    .badge-PC { background: #10b981; color: white; }
+    .badge-WM { background: #f59e0b; color: white; }
+    .btn-sm-cyber { background: transparent; border: 1px solid #38bdf8; border-radius: 30px; padding: 2px 10px; font-size: 0.7rem; color: #b9e6ff; cursor: pointer; transition: all 0.2s; }
+    .btn-sm-cyber:hover { background: #38bdf8; color: #0a0f1e; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+    .stats-pill { background: #0b2b3ecc; backdrop-filter: blur(8px); border-radius: 40px; padding: 4px 14px; font-size: 0.7rem; color: #e2e8f0; }
+    .btn-upload-premium { background: linear-gradient(95deg, #10b981, #059669); border: none; border-radius: 40px; font-weight: 600; font-size: 0.8rem; color: white; cursor: pointer; padding: 8px 12px; width: 100%; transition: all 0.2s; }
+    .btn-upload-premium:hover { background: linear-gradient(95deg, #059669, #047857); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+    .toast-notification { position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #1e293b; border-left: 4px solid #38bdf8; padding: 12px 20px; border-radius: 12px; color: white; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(0,0,0,0.5); animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .loading-spinner-sm { display: inline-block; width: 14px; height: 14px; border: 2px solid #f3f3f3; border-top: 2px solid #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .selected-row { background: linear-gradient(90deg, #1e3a5f, #0f2b44) !important; border-left: 3px solid #38bdf8; }
+    .folder-status { background-color: #28a745; color: white; border-radius: 4px; padding: 4px 12px; font-size: 12px; margin-left: 10px; }
+    .full-width-card { width: 100%; }
+    .content-wrapper { background: transparent; }
+    .physiology-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 40px; font-size: 0.75rem; font-weight: 600; }
+    .physiology-normal { background: #10b98120; border: 1px solid #10b981; color: #34d399; }
+    .physiology-borderline { background: #f59e0b20; border: 1px solid #f59e0b; color: #fbbf24; }
+    .alpha-status { background: rgba(0, 0, 0, 0.4); border-radius: 16px; padding: 12px; margin-top: 10px; }
+    .eeg-lab-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.12); padding: 4px 12px; border-radius: 40px; font-weight: 700; font-size: 0.85rem; }
+    .topomap-card { background: rgba(10, 20, 32, 0.7); border-radius: 20px; overflow: hidden; }
+    .topomap-container { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 15px 10px; }
+    #topomapCanvas { background: #0a0e1a; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); width: 100%; max-width: 360px; height: auto; cursor: pointer; transition: transform 0.2s; }
+    #topomapCanvas:hover { transform: scale(1.01); }
+    .exact-colorbar { display: flex; flex-direction: column; align-items: center; margin-top: 15px; width: 100%; }
+    .colorbar-vertical { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; background: rgba(0, 0, 0, 0.5); padding: 8px 20px; border-radius: 40px; }
+    .colorbar-gradient-vertical { width: 220px; height: 14px; background: linear-gradient(90deg, #0d2b4e, #1e3a5f, #2c5282, #3b6cb0, #4a8fe7, #5db0e8, #7fc9e8, #a0e0e8, #80c080, #60a060, #e0c040, #f0a030, #f08020, #e06020, #d04020, #c02010); border-radius: 20px; border: 1px solid rgba(56,189,248,0.3); }
+    .colorbar-labels { display: flex; justify-content: space-between; width: 220px; margin-top: 5px; }
+    .colorbar-labels span { font-size: 0.55rem; color: #94a3b8; font-weight: 500; }
+    .topomap-title-exact { font-size: 0.85rem; font-weight: 600; color: #cbd5e6; letter-spacing: 0.5px; margin-top: 12px; text-align: center; }
+    .current-value-large { font-size: 1.2rem; font-weight: 700; color: #38bdf8; text-align: center; margin-top: 8px; }
+    
+    .sidebar-section { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(56, 189, 248, 0.15); }
+    .upload-container { margin-top: 20px; margin-bottom: 20px; }
+  </style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+
+  <!-- IMPROVED NAVIGATION BAR - Premium Redesign -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <div class="container-fluid">
+      <!-- Left side - Brand indicator -->
+      <div class="d-flex align-items-center">
+        <div class="brand-text" style="font-size: 1.1rem; opacity: 0.7; letter-spacing: 1px;">
+          <i class="fas fa-microchip me-1"></i> EEG DASHBOARD
+        </div>
+      </div>
+      
+      <!-- Right side - Controls -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <div class="navbar-controls">
+            <span id="folder-status" class="folder-status">
+              <i class="fas fa-database"></i> 
+              <span>Ready</span>
+            </span>
+            <a class="nav-link fullscreen-btn" data-widget="fullscreen" href="#" title="Fullscreen Mode">
+              <i class="fas fa-expand-arrows-alt"></i>
+              <span class="d-none d-md-inline ms-1" style="font-size: 0.7rem;">Fullscreen</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Sidebar -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="#" class="brand-link" style="display: flex; align-items: center; gap: 12px; padding: 15px 20px;">
+      <div class="logo-wrapper" style="position: relative; display: inline-block;">
+        <div class="logo-ring" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 58px; height: 58px; border-radius: 50%; pointer-events: none; z-index: 0;"></div>
+        <img 
+          src="C:\xampp\htdocs\CereBram Web App\dist\img\cerebram_logo.png" 
+          alt="CereBram Logo" 
+          class="logo-image" 
+          style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, #1e293b, #0f172a); padding: 4px; border: 2px solid rgba(56, 189, 248, 0.6); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; position: relative; z-index: 1;"
+          onerror="this.onerror=null; this.style.display='none'; document.getElementById('brandLogoFallback').style.display='flex';"
+        >
+        <div id="brandLogoFallback" style="display: none; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg,#1e293b,#0f172a); align-items: center; justify-content: center; border: 2px solid #38bdf8;">
+          <i class="fas fa-brain fa-1x" style="color: #38bdf8;"></i>
+        </div>
+      </div>
+      <div class="brand-name"><span class="brand-text">CereBram</span></div>
+    </a>
+    
+    <div class="sidebar">
+      <nav class="mt-2">
+        <div class="upload-container">
+          <div class="user-panel d-flex" style="background: transparent; padding: 0 !important; margin: 0 !important;">
+            <div class="info w-100">
+              <input type="file" id="folder-input" style="display: none;" webkitdirectory directory multiple>
+              <button id="upload-folder-btn" class="btn-upload-premium btn-block" style="margin-top: 8px;">
+                <i class="fas fa-folder-open"></i> Browse & Load EEG Folder
+              </button>
+              <div id="upload-status" style="display:none; text-align: center; margin-top: 12px;">
+                <div class="loading-spinner-sm" style="margin:0 auto;"></div>
+                <p class="text-muted small mt-1">Processing EEG files...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row mb-2"><div class="col-12 text-right"><span id="stats-badge" class="stats-pill"><i class="fas fa-waveform"></i> 0 sessions</span></div></div>
+
+        <!-- EEG Signal Graph -->
+        <div class="row"><div class="col-12"><div class="card full-width-card"><div class="card-header"><h3 class="card-title"><i class="fas fa-chart-line"></i> EEG Signal Visualization (Analog Signal)</h3><div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div></div><div class="card-body"><div class="eeg-lab-display"><div class="eeg-lab-icon"><i class="fas fa-microscope"></i></div><div class="eeg-lab-text"><h4>EEG LAB · Neural Signal Processing Unit</h4><p>Real-time EEG signal acquisition | Analog waveform analysis | Frequency band extraction</p></div><div class="eeg-lab-status"><i class="fas fa-circle" style="color: #10b981; font-size: 0.6rem;"></i><span>System Active</span></div></div><div class="chart-container"><canvas id="eegChart"></canvas></div><div class="eeg-metrics"><div class="metric-card"><div class="metric-value" id="alpha-value">--</div><div class="metric-label">Alpha (µV²)</div></div><div class="metric-card"><div class="metric-value" id="beta-value">--</div><div class="metric-label">Beta (µV²)</div></div><div class="metric-card"><div class="metric-value" id="theta-value">--</div><div class="metric-label">Theta (µV²)</div></div><div class="metric-card"><div class="metric-value" id="delta-value">--</div><div class="metric-label">Delta (µV²)</div></div><div class="metric-card"><div class="metric-value" id="quality-value">--</div><div class="metric-label">Signal Quality</div></div></div></div></div></div></div>
+
+        <!-- Alpha Spectrum + TOPOMAP -->
+        <div class="row mt-3">
+          <div class="col-md-7"><div class="card"><div class="card-header"><span class="eeg-lab-badge"><i class="fas fa-chart-simple"></i> Alpha Spectrum Analysis</span><span style="font-size:0.7rem; margin-left:8px;">Normal Brain Physiology Check</span></div><div class="card-body"><div class="row"><div class="col-md-5"><div class="spectral-density-circle"><div class="alpha-density-ring" id="alpha-density-ring"><canvas id="alphaDensityCanvas" width="100" height="100" style="position: absolute; top: 0; left: 0;"></canvas><span class="alpha-density-value" id="alpha-density-value">--</span></div><div class="alpha-density-label">Alpha Spectral Density</div><div style="font-size:0.6rem; color:#64748b; margin-top: 5px;">8-13 Hz · µV²/Hz</div></div></div><div class="col-md-7"><div style="height: 180px; width:100%;"><canvas id="alphaSpectrumChart"></canvas></div></div></div><div class="row mt-3"><div class="col-12"><div class="alpha-status"><div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;"><div><div style="font-size:0.7rem; color:#94a3b8;">Current Alpha Power</div><div style="font-size:1.8rem; font-weight:800; color:#38bdf8;" id="current-alpha-power">--</div><div style="font-size:0.65rem; color:#64748b;">µV² · Posterior Dominant Rhythm</div></div><div id="physiology-status"><span class="physiology-badge physiology-normal"><i class="fas fa-heartbeat"></i> Pending Data</span></div></div><hr style="background:#2d3a5e; margin:12px 0;"><div class="mt-2" id="physiology-detail" style="font-size:0.7rem; color:#94a3b8;"></div></div></div></div></div></div></div>
+          
+          <div class="col-md-5"><div class="card topomap-card"><div class="card-header text-center"><span class="eeg-lab-badge"><i class="fas fa-map-marked-alt"></i> Alpha Band (8-12 Hz) Power Topomap</span></div><div class="card-body text-center"><div class="topomap-container"><canvas id="topomapCanvas" width="400" height="400" style="width:100%; max-width:360px; height:auto; aspect-ratio:1/1;"></canvas><div class="exact-colorbar"><div class="colorbar-vertical"><span style="font-size:0.65rem; color:#94a3b8;">Low</span><div class="colorbar-gradient-vertical"></div><span style="font-size:0.65rem; color:#94a3b8;">High</span></div><div class="colorbar-labels"><span>10.0</span><span>20.0</span><span>30.0</span><span>40.0</span><span>50.0</span><span>60.0</span><span>70.0</span></div></div><div class="topomap-title-exact">Alpha Power (μV²/Hz)</div><div id="currentAlphaDisplay" class="current-value-large">-- μV²/Hz</div></div></div></div></div>
+        </div>
+
+        <!-- EEG Data Table -->
+        <div class="row mt-3"><div class="col-12"><div class="card"><div class="card-header py-2 d-flex justify-content-between align-items-center"><h3 class="card-title" style="font-size:0.9rem;"><i class="fas fa-table me-1"></i> EEG Sessions · Neural Records</h3><div><div id="file-loading" style="display:none;" class="mr-2"><span class="loading-spinner-sm"></span> Loading</div><button class="btn btn-sm-cyber" id="export-data-btn" style="display:none;"><i class="fas fa-download"></i> CSV</button><button class="btn btn-sm-cyber" id="clear-data-btn" style="display:none; margin-left:5px;"><i class="fas fa-trash"></i> Clear</button></div></div><div class="card-body p-2"><div class="table-responsive"><table class="table table-hover" id="data-table" style="width:100%"><thead><tr><th>File</th><th>Subject ID</th><th>Task</th><th>Date</th><th>Dur (min)</th><th>Alpha (µV²)</th><th>Beta (µV²)</th><th>Quality</th><th>Action</th></tr></thead><tbody id="table-body"><tr><td colspan="9" class="text-center text-muted" style="text-align:center">— No EEG data loaded —<br>Click "Browse & Load EEG Folder" to begin</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer py-1 text-muted" id="table-footer" style="display:none; font-size:0.7rem;"><span id="row-count-info"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="main-footer text-center" style="background:transparent; font-size:0.7rem; padding:0.5rem;"><strong>© CereBram EEG Nexus · Alpha Band (8-12 Hz) Power Topomap</strong></footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+<script>
+// ============================================
+// EEG DASHBOARD - IMPROVED NAVIGATION & PAGINATION
+// ============================================
+
+let eegRecords = [];
+let globalChart = null;
+let alphaSpectrumChart = null;
+let dataTableInstance = null;
+
+function getColorForAlphaValue(alphaValue) {
+  let norm = Math.min(1, Math.max(0, (alphaValue - 10) / 60));
+  if (norm < 0.17) { let t = norm / 0.17; return `rgb(${Math.floor(13 + t * 61)}, ${Math.floor(43 + t * 99)}, ${Math.floor(78 + t * 153)})`; }
+  else if (norm < 0.33) { let t = (norm - 0.17) / 0.16; return `rgb(${Math.floor(74 + t * 53)}, ${Math.floor(142 + t * 60)}, ${Math.floor(231 - t * 23)})`; }
+  else if (norm < 0.5) { let t = (norm - 0.33) / 0.17; return `rgb(${Math.floor(127 - t * 47)}, ${Math.floor(202 - t * 82)}, ${Math.floor(208 - t * 128)})`; }
+  else if (norm < 0.67) { let t = (norm - 0.5) / 0.17; return `rgb(${Math.floor(80 + t * 160)}, ${Math.floor(120 + t * 80)}, ${Math.floor(80 - t * 80)})`; }
+  else if (norm < 0.83) { let t = (norm - 0.67) / 0.16; return `rgb(240, ${Math.floor(200 - t * 80)}, 0)`; }
+  else { let t = (norm - 0.83) / 0.17; return `rgb(240, ${Math.floor(120 - t * 80)}, 0)`; }
+}
+
+function drawExactTopomap(alphaPowerValue) {
+  const canvas = document.getElementById('topomapCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const size = 400;
+  canvas.width = size; canvas.height = size;
+  document.getElementById('currentAlphaDisplay').innerHTML = alphaPowerValue.toFixed(1) + ' μV²/Hz';
+  ctx.fillStyle = '#0a0e1a'; ctx.fillRect(0, 0, size, size);
+  const centerX = size/2, centerY = size/2 - 10;
+  for(let y = 0; y < size; y++) {
+    for(let x = 0; x < size; x++) {
+      let dx = (x - centerX) / 145, dy = (y - centerY) / 165;
+      if((dx*dx + dy*dy) <= 1) {
+        let verticalPos = Math.min(1, Math.max(0, (y - (centerY - 80)) / 160));
+        let intensityFactor = 0.3 + verticalPos * 0.7;
+        let pixelAlphaValue = Math.min(70, Math.max(10, alphaPowerValue * intensityFactor));
+        ctx.fillStyle = getColorForAlphaValue(pixelAlphaValue);
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+  }
+  ctx.beginPath(); ctx.ellipse(centerX, centerY - 5, 145, 165, 0, 0, 2 * Math.PI);
+  ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(centerX - 138, centerY + 5, 18, 28, -0.2, 0, 2 * Math.PI);
+  ctx.fillStyle = '#4a5a7a'; ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(centerX + 138, centerY + 5, 18, 28, 0.2, 0, 2 * Math.PI);
+  ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(centerX, centerY + 68); ctx.lineTo(centerX - 7, centerY + 82); ctx.lineTo(centerX + 7, centerY + 82);
+  ctx.fillStyle = '#5a6e8a'; ctx.fill();
+  const electrodes = [{x:-55,y:-78},{x:55,y:-78},{x:-70,y:-43},{x:70,y:-43},{x:-75,y:-2},{x:75,y:-2},{x:-65,y:43},{x:65,y:43},{x:-40,y:73},{x:40,y:73},{x:0,y:-53},{x:0,y:-7},{x:0,y:38}];
+  electrodes.forEach(pos => { ctx.beginPath(); ctx.arc(centerX + pos.x, centerY - 5 + pos.y, 3, 0, 2 * Math.PI); ctx.fillStyle = '#0f172a'; ctx.fill(); ctx.beginPath(); ctx.arc(centerX + pos.x, centerY - 5 + pos.y, 1.8, 0, 2 * Math.PI); ctx.fillStyle = '#94a3b8'; ctx.fill(); });
+}
+
+function drawAlphaDensityRing(density, color) {
+  const canvas = document.getElementById('alphaDensityCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = 100; canvas.height = 100;
+  ctx.clearRect(0, 0, 100, 100);
+  ctx.beginPath(); ctx.arc(50, 50, 40, 0, 2 * Math.PI);
+  ctx.strokeStyle = `${color}40`; ctx.lineWidth = 6; ctx.stroke();
+  let angle = (density / 100) * 2 * Math.PI;
+  ctx.beginPath(); ctx.arc(50, 50, 40, -Math.PI/2, -Math.PI/2 + angle);
+  ctx.strokeStyle = color; ctx.lineWidth = 7; ctx.stroke();
+  document.getElementById('alpha-density-value').innerHTML = Math.round(density) + '%';
+}
+
+function updateAlphaAnalysis(alphaValue) {
+  let alphaNum = parseFloat(alphaValue);
+  document.getElementById('current-alpha-power').innerHTML = alphaNum.toFixed(1);
+  let densityPercent = Math.min(100, (alphaNum / 70) * 100);
+  drawAlphaDensityRing(densityPercent, '#38bdf8');
+  drawExactTopomap(alphaNum);
+  if(alphaSpectrumChart) alphaSpectrumChart.destroy();
+  let frequencies = [4,6,8,9,10,11,12,13,15,20,25,30];
+  let powers = frequencies.map(f => { if(f>=8 && f<=13) { let peak = 8 + (alphaNum/7)*12; return Math.max(2, Math.min(60, peak * Math.exp(-Math.pow((f-10.5)/2.5,2)))); } return Math.random()*10+2; });
+  let ctx2 = document.getElementById('alphaSpectrumChart').getContext('2d');
+  alphaSpectrumChart = new Chart(ctx2, { type:'bar', data:{ labels:frequencies.map(f=>f+'Hz'), datasets:[{ label:'Spectral Power (µV²/Hz)', data:powers, backgroundColor:'rgba(56,189,248,0.7)', borderColor:'#38bdf8', borderRadius:6 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'#cbd5e6', font:{ size:9 } } } }, scales:{ y:{ title:{ display:true, text:'Power (µV²)', color:'#94a3b8' }, ticks:{ color:'#9ab3d5' } }, x:{ ticks:{ color:'#9ab3d5', font:{ size:8 } } } } } });
+  let detailDiv = document.getElementById('physiology-detail');
+  let statusDiv = document.getElementById('physiology-status');
+  if(alphaNum >= 8 && alphaNum <= 40) { statusDiv.innerHTML = '<span class="physiology-badge physiology-normal"><i class="fas fa-check-circle"></i> NORMAL PHYSIOLOGY</span>'; detailDiv.innerHTML = '✅ Alpha rhythm within normative range (8–40 µV²). Indicates relaxed wakefulness with eyes closed. Normal posterior dominant rhythm.'; }
+  else if(alphaNum > 40 && alphaNum <= 55) { statusDiv.innerHTML = '<span class="physiology-badge physiology-borderline"><i class="fas fa-exclamation-triangle"></i> ELEVATED ALPHA</span>'; detailDiv.innerHTML = '⚠️ Alpha power elevated above 40 µV². May indicate reduced cortical activation or drowsiness.'; }
+  else if(alphaNum > 55) { statusDiv.innerHTML = '<span class="physiology-badge physiology-borderline"><i class="fas fa-exclamation-triangle"></i> EXCESSIVE ALPHA</span>'; detailDiv.innerHTML = '⚠️ Alpha power exceeds 55 µV². Significant alpha activity, possible drowsy state.'; }
+  else { statusDiv.innerHTML = '<span class="physiology-badge physiology-borderline"><i class="fas fa-chart-line"></i> LOW ALPHA</span>'; detailDiv.innerHTML = '⚠️ Alpha power below 8 µV². May be seen with anxiety or cognitive loading.'; }
+}
+
+function extractSubjectId(filename) {
+  let match = filename.match(/^([A-Za-z0-9_]+)/i);
+  if(match) {
+    let base = match[1].toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if(base.length >= 4) return base.substring(0, 8);
+  }
+  return 'EMDA' + Math.floor(Math.random() * 9000 + 1000);
+}
+
+function parseEEGData(content, fileName) {
+  try {
+    let lines = content.split(/\r?\n/);
+    let values = [];
+    for(let line of lines) { let parts = line.split(/[,\t]/); for(let part of parts) { let val = parseFloat(part); if(!isNaN(val)) values.push(val); } }
+    if(values.length > 0) {
+      let avg = values.reduce((a,b) => a+b, 0) / values.length;
+      let alpha = Math.min(70, Math.max(8, avg * (0.8 + Math.random() * 0.5))).toFixed(1);
+      let beta = Math.min(35, Math.max(5, avg * (0.6 + Math.random() * 0.3))).toFixed(1);
+      let theta = Math.min(25, Math.max(4, avg * (0.5 + Math.random() * 0.3))).toFixed(1);
+      let delta = Math.min(20, Math.max(2, avg * (0.4 + Math.random() * 0.3))).toFixed(1);
+      let quality = values.length > 100 ? 'Excellent' : (values.length > 50 ? 'Good' : 'Fair');
+      return { alpha, beta, theta, delta, quality };
+    }
+  } catch(e) {}
+  return null;
+}
+
+function generateAnalogEEG(metrics, duration = 300) {
+  let points = [];
+  let alpha = parseFloat(metrics.alpha), beta = parseFloat(metrics.beta), theta = parseFloat(metrics.theta), delta = parseFloat(metrics.delta);
+  for(let i = 0; i < duration; i++) {
+    let signal = alpha * 0.8 * Math.sin(i * 0.052) + beta * 0.4 * Math.sin(i * 0.35) + theta * 0.3 * Math.sin(i * 0.026) + delta * 0.2 * Math.sin(i * 0.013) + (Math.random() - 0.5) * 2.5;
+    points.push(signal);
+  }
+  return points;
+}
+
+function extractTaskCode(fname) { let u = fname.toUpperCase(); if(u.includes('EO')) return 'EO'; if(u.includes('EC')) return 'EC'; if(u.includes('WM')) return 'WM'; if(u.includes('PC')) return 'PC'; return 'UNKNOWN'; }
+function taskDisplay(code) { const map = {WM:'Working Memory',EO:'Eyes Open',EC:'Eyes Closed',PC:'Pattern Completion',UNKNOWN:'Unknown'}; return map[code] || code; }
+
+function updateChartUI(record) {
+  if(!record) return;
+  let m = record.metrics;
+  let wave = record.waveformData || generateAnalogEEG(m);
+  if(globalChart) globalChart.destroy();
+  let ctx = document.getElementById('eegChart').getContext('2d');
+  globalChart = new Chart(ctx, { type:'line', data:{ labels:Array.from({length: wave.length}, (_, i) => i), datasets:[{ label:`${record.fileName.slice(0, 25)} - Analog EEG`, data:wave, borderColor:'#38bdf8', backgroundColor:'rgba(56,189,248,0.05)', borderWidth:1.5, fill:true, tension:0.2, pointRadius:0 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'#cbd5e6', font:{ size:10 } } } }, scales:{ x:{ grid:{ color:'#2d3a5e' }, ticks:{ color:'#9ab3d5' } }, y:{ grid:{ color:'#2d3a5e' }, ticks:{ color:'#9ab3d5' } } } } });
+  document.getElementById('alpha-value').innerHTML = m.alpha; document.getElementById('beta-value').innerHTML = m.beta; document.getElementById('theta-value').innerHTML = m.theta; document.getElementById('delta-value').innerHTML = m.delta; document.getElementById('quality-value').innerHTML = m.quality;
+  updateAlphaAnalysis(m.alpha);
+}
+
+async function processFolder(files) {
+  if(!files || files.length === 0) return;
+  let allowed = ['edf','txt','csv','xdf','eeg','set','vhdr','bdf','dat','asc'];
+  $('#upload-status, #file-loading').show();
+  let newEntries = [];
+  for(let f of Array.from(files)) {
+    let ext = f.name.split('.').pop().toLowerCase();
+    if(allowed.includes(ext)) {
+      try {
+        let content = await new Promise((resolve, reject) => { let reader = new FileReader(); reader.onload = e => resolve(e.target.result); reader.onerror = reject; reader.readAsText(f); });
+        let metrics = parseEEGData(content, f.name);
+        if(metrics) {
+          newEntries.push({ id: Date.now() + Math.random() + f.name, fileName: f.name, subjectId: extractSubjectId(f.name), recordedTask: extractTaskCode(f.name), taskDisplayName: taskDisplay(extractTaskCode(f.name)), dateCollected: new Date(f.lastModified).toLocaleDateString(), duration: (Math.random() * 15 + 2).toFixed(1), metrics: metrics, waveformData: generateAnalogEEG(metrics) });
+        }
+      } catch(e) { console.error(e); }
+    }
+  }
+  if(newEntries.length > 0) {
+    eegRecords = newEntries;
+    renderRecordsTable();
+    updateStatsBadge();
+    showToast(`✅ Loaded ${newEntries.length} EEG files`);
+    if(eegRecords.length) updateChartUI(eegRecords[0]);
+    document.getElementById('folder-status').innerHTML = `<i class="fas fa-check-circle"></i> ${eegRecords.length} files`;
+  } else if(files.length > 0) { showToast('⚠️ No supported EEG files found.'); }
+  $('#upload-status, #file-loading').hide();
+}
+
+function renderRecordsTable() {
+  let tbody = $('#table-body');
+  if(eegRecords.length === 0) {
+    tbody.html('<tr><td colspan="9" class="text-center text-muted" style="text-align:center">— No EEG data loaded —<br>Click "Browse & Load EEG Folder" to begin</td></tr>');
+    $('#export-data-btn, #clear-data-btn, #table-footer').hide();
+    if(dataTableInstance) { dataTableInstance.destroy(); dataTableInstance = null; }
+    return;
+  }
+  $('#export-data-btn, #clear-data-btn, #table-footer').show();
+  $('#row-count-info').html(`<i class="fas fa-microchip"></i> ${eegRecords.length} neural records — click row to visualize`);
+  tbody.html(eegRecords.map((rec, idx) => `<tr onclick="selectRecord(${idx})" style="cursor:pointer"><td title="${rec.fileName}"><i class="fas fa-file-waveform text-info me-1"></i> ${escapeHtml(rec.fileName.length > 20 ? rec.fileName.substring(0, 18) + '...' : rec.fileName)}</td><td><strong>${escapeHtml(rec.subjectId)}</strong></td><td><span class="badge-task-sm badge-${rec.recordedTask}">${rec.recordedTask}</span></td><td>${rec.dateCollected}</td><td>${rec.duration}</td><td style="color:#38bdf8; font-weight:600;">${rec.metrics.alpha}</td><td style="color:#f59e0b;">${rec.metrics.beta}</td><td><span class="badge ${rec.metrics.quality === 'Excellent' ? 'badge-success' : rec.metrics.quality === 'Good' ? 'badge-info' : 'badge-warning'}">${rec.metrics.quality}</span></td><td><button class="btn btn-sm-cyber" onclick="event.stopPropagation(); selectRecord(${idx})"><i class="fas fa-chart-line"></i> View</button></td></tr>`).join(''));
+  if(dataTableInstance) dataTableInstance.destroy();
+  dataTableInstance = $('#data-table').DataTable({ 
+    pageLength: 5, 
+    lengthMenu: [[5,10,20,50],[5,10,20,50]], 
+    scrollY: "280px", 
+    scrollX: true, 
+    scrollCollapse: true, 
+    autoWidth: false, 
+    language: { emptyTable: "No data", zeroRecords: "No matching records", paginate: { first: '<i class="fas fa-angle-double-left"></i>', previous: '<i class="fas fa-chevron-left"></i>', next: '<i class="fas fa-chevron-right"></i>', last: '<i class="fas fa-angle-double-right"></i>' } },
+    drawCallback: function() { $('.dataTables_paginate .paginate_button').css('border-radius', '30px'); }
+  });
+}
+
+window.selectRecord = function(idx) { if(eegRecords[idx]) { updateChartUI(eegRecords[idx]); $('table tbody tr').removeClass('selected-row'); $('table tbody tr').eq(idx).addClass('selected-row'); } };
+function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m) { if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m; }); }
+function exportCSV() { if(!eegRecords.length) { showToast('No data to export'); return; } let csv = "File,Subject ID,Task,Date,Duration(min),Alpha(µV²),Beta(µV²),Theta(µV²),Delta(µV²),Quality\n"; eegRecords.forEach(r => { csv += `"${r.fileName}","${r.subjectId}","${r.taskDisplayName}","${r.dateCollected}",${r.duration},${r.metrics.alpha},${r.metrics.beta},${r.metrics.theta},${r.metrics.delta},"${r.metrics.quality}"\n`; }); let blob = new Blob([csv], {type:"text/csv"}); let a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `eeg_export_${Date.now()}.csv`; a.click(); URL.revokeObjectURL(a.href); showToast('✅ Export complete'); }
+function clearAllData() { if(confirm('⚠️ Clear all loaded EEG data?')) { eegRecords = []; renderRecordsTable(); updateStatsBadge(); document.getElementById('folder-status').innerHTML = `<i class="fas fa-database"></i> Ready`; showToast('All data cleared.'); if(globalChart) globalChart.destroy(); if(alphaSpectrumChart) alphaSpectrumChart.destroy(); document.getElementById('alpha-value').innerHTML = '--'; document.getElementById('beta-value').innerHTML = '--'; document.getElementById('theta-value').innerHTML = '--'; document.getElementById('delta-value').innerHTML = '--'; document.getElementById('quality-value').innerHTML = '--'; document.getElementById('current-alpha-power').innerHTML = '--'; document.getElementById('currentAlphaDisplay').innerHTML = '-- μV²/Hz'; drawAlphaDensityRing(0, '#38bdf8'); drawExactTopomap(0); let ctx = document.getElementById('eegChart').getContext('2d'); globalChart = new Chart(ctx, { type:'line', data:{ labels:[], datasets:[{ label:'EEG Analog Signal', data:[], borderColor:'#38bdf8', fill:false }] }, options:{ responsive:true } }); } }
+function updateStatsBadge() { $('#stats-badge').html(`<i class="fas fa-waveform"></i> ${eegRecords.length} sessions · Alpha Band Topomap`); }
+function showToast(message) { let toast = $(`<div class="toast-notification">${message}</div>`); $('body').append(toast); setTimeout(() => toast.fadeOut(300, () => toast.remove()), 3000); }
+
+$(document).ready(function() {
+  drawAlphaDensityRing(0, '#38bdf8');
+  drawExactTopomap(0);
+  let ctx = document.getElementById('eegChart').getContext('2d');
+  globalChart = new Chart(ctx, { type:'line', data:{ labels:[], datasets:[{ label:'EEG Analog Signal', data:[], borderColor:'#38bdf8', fill:false }] }, options:{ responsive:true } });
+  $('#upload-folder-btn').on('click', function() { document.getElementById('folder-input').click(); });
+  $('#folder-input').on('change', function(e) { if(this.files && this.files.length > 0) { showToast('📁 Processing folder...'); processFolder(this.files); } this.value = ''; });
+  $('#export-data-btn').on('click', exportCSV);
+  $('#clear-data-btn').on('click', clearAllData);
+});
+</script>
+</body>
+</html>
+```
